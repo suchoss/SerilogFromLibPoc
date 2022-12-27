@@ -1,0 +1,34 @@
+{
+  "Serilog": {
+    "Using": [ "Serilog.Sinks.Console", "Serilog.Expressions" ],
+    "MinimumLevel": "Verbose",
+    "WriteTo": [
+      {
+        "Name": "Logger",
+        "Args": {
+          "configureLogger": {
+            "Filter": [
+              {
+                "Name": "ByExcluding",
+                "Args": {
+                  "expression": "SourceContext like 'PartialLog.Off%'"
+                }
+              },
+              {
+                "Name": "ByExcluding",
+                "Args": {
+                  "expression": "SourceContext like 'LibWithLoggingTurnedOff%'"
+                }
+              }
+            ],
+            "WriteTo": [
+              {
+                "Name": "Console"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}
